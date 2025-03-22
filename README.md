@@ -23,8 +23,8 @@ cd News-Summary
    ```
    - Get your NewsAPI key from https://newsapi.org.
    - Get your Gemini API key from Google Cloud Console.
-3. Build the Docker Images and run the container
-   3.1 Build the Backend Image 
+3. Build the Docker Images and run the container 
+- **Build the Backend Image** 
    ```
    cd backend
    docker build -t news-summarizer-backend:latest .
@@ -32,7 +32,7 @@ cd News-Summary
    cd ..
    ```
    - The backend will start on http://localhost:5000.
-   3.2 Build the Frontend Image
+- **Build the Frontend Image**
    ```
    cd frontend
    docker network create news-summarizer-network
@@ -40,7 +40,7 @@ cd News-Summary
    ```
    - The frontend will be accessible in your browser at http://localhost:7860.
 
-4 Stop the Containers:
+- **Stop the Containers:**
 ```
 docker stop news-summarizer-backend news-summarizer-frontend
 ```
