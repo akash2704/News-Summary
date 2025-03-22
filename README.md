@@ -1,48 +1,49 @@
 # News Summarizer - First Release
 
-This project fetches news articles for a given company, summarizes them, performs sentiment analysis, extracts topics, and generates Hindi TTS summaries. It uses a Flask backend for API processing, a Streamlit frontend for user interaction, and integrates with third-party APIs like NewsAPI and Google Gemini. The core logic is in `news_summarizer.py`, the backend is in `app.py`, and the frontend is in `frontend.py`.
+This project fetches news articles for a given company, summarizes them, performs sentiment analysis, extracts topics, and generates Hindi TTS summaries. It uses a Flask backend for API processing, a Streamlit frontend for user interaction, and integrates with third-party APIs like NewsAPI and Google Gemini. The core logic is in `backend/news_summarizer.py`, the backend is in `backend/app.py`, and the frontend is in `frontend/app.py`.
 
-## Project Setup
+## Project Setup (Local Development with Docker)
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd news-summarizer
-   ```
+### Prerequisites
+- **Docker**: Install Docker for containerization (`sudo apt install docker.io` on Ubuntu, or download from https://www.docker.com/products/docker-desktop/).
+- **Git**: Install Git for version control (`sudo apt install git` on Ubuntu, or download from https://git-scm.com/downloads).
 
-2. Set up a virtual environment (recommended):
+1. Clone the Repository
+```bash
+git clone https://github.com/akash2704/News-Summary.git
+cd News-Summary
+```
+2. Create a .env File for API Keys
+   Create a .env file in the backend directory with your API keys:
    ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   cd backend
+   echo "NEWSAPI_KEY=your-newsapi-key" >> .env
+   echo "GEMINI_API_KEY=your-gemini-api-key" >> .env
+   cd ..
    ```
+   - Get your NewsAPI key from https://newsapi.org.
+   - Get your Gemini API key from Google Cloud Console.
+3. Build the Docker Images and run the container
+   3.1 Build the Backend Image 
+   ```
+   cd backend
+   docker build -t news-summarizer-backend:latest .
+   docker run --rm -d --name news-summarizer-backend --env-file ../.env -p 5000:5000 news-summarizer-backend:latest
+   cd ..
+   ```
+   - The backend will start on http://localhost:5000.
+   3.2 Build the Frontend Image
+   ```
+   cd frontend
+   docker network create news-summarizer-network
+   docker run --rm -d --name news-summarizer-frontend -p 7860:7860 news-summarizer-frontend:latest
+   ```
+   - The frontend will be accessible in your browser at http://localhost:7860.
 
-3. Install dependencies using `poetry` (preferred) or `pip`:
-   ```
-   poetry install
-   ```
-   Or:
-   ```
-   pip install flask streamlit newsapi-python requests beautifulsoup4 google-generative-ai gtts python-dotenv
-   ```
-
-4. Create a `.env` file in the project root with your API keys:
-   ```
-   NEWSAPI_KEY=your-newsapi-key
-   GEMINI_API_KEY=your-gemini-api-key
-   ```
-   Get your NewsAPI key from https://newsapi.org and your Gemini API key from Google Cloud Console.
-
-5. Run the Flask backend:
-   ```
-   poetry run python app.py
-   ```
-   It will start on `http://localhost:5000`.
-
-6. Run the Streamlit frontend in a separate terminal:
-   ```
-   poetry run streamlit run frontend.py
-   ```
-   It will open in your browser at `http://localhost:8501`.
+4 Stop the Containers:
+```
+docker stop news-summarizer-backend news-summarizer-frontend
+```
 
 ## Model Details
 
