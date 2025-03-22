@@ -1,7 +1,13 @@
-# News Summarizer - First Release
+# News Summarizer 
 
 This project fetches news articles for a given company, summarizes them, performs sentiment analysis, extracts topics, and generates Hindi TTS summaries. It uses a Flask backend for API processing, a Streamlit frontend for user interaction, and integrates with third-party APIs like NewsAPI and Google Gemini. The core logic is in `backend/news_summarizer.py`, the backend is in `backend/app.py`, and the frontend is in `frontend/app.py`.
-
+## Tech Stack 
+- Python
+- Flask
+- Streamlit
+- Docker
+- Azure ACI
+- Huggingface Spaces
 ## Project Setup (Local Development with Docker)
 
 ### Prerequisites
