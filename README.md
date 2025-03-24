@@ -9,7 +9,7 @@ This project fetches news articles for a given company, summarizes them, perform
 - Azure ACI
 - Huggingface Spaces
 ## Project Setup (Local Development with Docker)
-
+- **demo:** https://huggingface.co/spaces/ak2704/news-summerizer-frontend
 ### Prerequisites
 - **Docker**: Install Docker for containerization (`sudo apt install docker.io` on Ubuntu, or download from https://www.docker.com/products/docker-desktop/).
 - **Git**: Install Git for version control (`sudo apt install git` on Ubuntu, or download from https://git-scm.com/downloads).
